@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>测试</title>
+<style>
+.item_content ul { list-style: none; }
+.item_content ul li { width: 200px; height: 160px; float: left; margin: 10px }
+.item_content { width: 740px; height: auto; border: 1px solid #ccc; float: left; }
+.item_content .item { width: 200px; height: 120px; line-height: 120px; text-align: center; cursor: pointer; background: #ccc; }
+.item_content .item img { width: 200px; height: 120px; border-radius: 6px; }
+.close { display: block; width: 20px; height: 20px; top: 0; right: 0; z-index: 9999; position: absolute; text-align: center; font-size: 16px; cursor: pointer; color: aliceblue }
+</style>
+</head>
+<body>
+<div class="item_container">
+  <div class="item_content" id="imageChange">
+    <ul id="imageChangesss">
+      <li>
+        <div class="item"> <img src="https://www.jq22.com/img/cs/500x500-1.png" width="150" height="150"> 
+        <span onclick="removePicture(this)" class="rmPicture close">×</span> </div>
+      </li>
+      <li>
+        <div class="item"> <img src="https://www.jq22.com/img/cs/500x500-2.png" width="150" height="150"> 
+        <span onclick="removePicture(this)" class="rmPicture close">×</span> </div>
+      </li>
+      <li>
+        <div class="item"> <img src="https://www.jq22.com/img/cs/500x500-3.png" width="150" height="150"> 
+        <span onclick="removePicture(this)" class="rmPicture close">×</span> </div>
+      </li>
+      <li>
+        <div class="item"> <img src="https://www.jq22.com/img/cs/500x500-4.png" width="150" height="150"> 
+        <span onclick="removePicture(this)" class="rmPicture close">×</span> </div>
+      </li>
+      <li>
+        <div class="item"> <img src="https://www.jq22.com/img/cs/500x500-5.png" width="150" height="150"> 
+        <span onclick="removePicture(this)" class="rmPicture close">×</span> </div>
+      </li>
+      <li>
+        <div class="item"> <img src="https://www.jq22.com/img/cs/500x500-6.png" width="150" height="150"> 
+        <span onclick="removePicture(this)" class="rmPicture close">×</span> </div>
+      </li>
+      <li>
+        <div class="item"> <img src="https://www.jq22.com/img/cs/500x500-7.png" width="150" height="150"> 
+        <span onclick="removePicture(this)" class="rmPicture close">×</span> </div>
+      </li>
+      <li>
+        <div class="item"> <img src="https://www.jq22.com/img/cs/500x500-8.png" width="150" height="150"> 
+        <span onclick="removePicture(this)" class="rmPicture close">×</span> </div>
+      </li>
+      <li>
+        <div class="item"> <img src="https://www.jq22.com/img/cs/500x500-9.png" width="150" height="150"> 
+        <span onclick="removePicture(this)" class="rmPicture close">×</span> </div>
+      </li>
+    </ul>
+   
+  </div>
+</div>
+</body>
+</html>
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="/node_modules/sortablejs/Sortable.min.js"></script>
+<script>
+
+	$(function() {
+        var el = document.getElementById('imageChangesss');
+		new Sortable(el, {
+            group: "name",
+            draggable:"li",
+            swapThreshold: 1,
+            animation: 150
+        });
+	}) ;
+</script>

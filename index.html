@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>demo1</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="demo1" src="" width="90px" hight="60px"></img>
+</body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+    var reg =  /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^+=_\-*/&*?\(\)]).{6,16}$/;
+    $(function () {
+        //XMLHttpRequest_Download();
+        //var reg = RegExp("- ^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[`~!@#$%^&*()-=_+;':",./<>?])(?=\S+$).{6,}$");
+        var a1 = reg.test("123%");
+        var a2 = reg.test("123!?");
+        var a3 = reg.test("123.");
+    });
+
+    function getimg() {
+        $.ajax
+        $.ajax({
+            url: "http://localhost:8080/scada-front-web/webportal/getSMSCaptcha",
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: {
+                "phone": "123123",
+                "type": "add",
+                "id": ""
+            },
+            method: "POST",
+        });
+    }
+
+    function XMLHttpRequest_Download() {
+        //  获取时间戳
+        let timestamp = new Date().getTime();
+        // 获取XMLHttpRequest
+        let xmlResquest = new XMLHttpRequest();
+        //  发起请求
+        //xmlResquest.open("POST", 'http://10.120.10.172:8080/scada-front-web/webportal/getRteContainersExportExcel', true);
+        //xmlResquest.open("POST", 'http://localhost:8080/scada-front-web/webportal/getRteContainersExportExcel', true);
+        //xmlResquest.open("POST", 'http://localhost:8080/scada-front-web/webportal/getContainersByBillNumberExportExcel', true);
+        //xmlResquest.open("POST", 'http://10.120.10.172:8080/scada-front-web/webportal/getContainersByBillNumberExportExcel', true);
+        xmlResquest.open("POST", 'http://10.120.10.172:8080/scada-front-web/webportal/getConsignorContainersExportExcel', true);
+        // 设置请求头类型
+        xmlResquest.setRequestHeader("Content-type", "application/json");
+        //  设置请求token
+        xmlResquest.setRequestHeader(
+            "X-Session-Token",
+            '4456006ac622493b8e3c46dea4635528'
+        );
+        xmlResquest.responseType = "blob";
+        //  返回
+        xmlResquest.onload = function (oEvent) {
+            let content = xmlResquest.response;
+            console.log('content', content)
+            // 组装a标签
+            let elink = document.createElement("a");
+            // 设置下载文件名
+            elink.download = timestamp + ".xlsx";
+            elink.style.display = "none";
+            let blob = new Blob([content]);
+            elink.href = URL.createObjectURL(blob);
+            document.body.appendChild(elink);
+            elink.click();
+            document.body.removeChild(elink);
+        };
+
+        /* xmlResquest.send(JSON.stringify({
+    "BillNumber":"22005641",
+    "pageIndex":0,
+    "pageSize":10
+}));
+    } */
+    xmlResquest.send(JSON.stringify({
+    "cntrno":"",
+    "starttm":"",
+    "endtm":""
+}));
+    }
+</script>
+
+</html>

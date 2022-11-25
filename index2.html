@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>canvas</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <canvas id="canvasDemo" width="1000" height="1000"></canvas>
+</body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function(){    
+        draw();
+    });
+
+    function draw() {
+        var canvas = document.getElementById('canvasDemo');
+        if (!canvas.getContext) return;
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.moveTo(170, 325);        
+        ctx.lineTo(38, 317);
+        ctx.strokeStyle ='#BBFF66';
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(38, 317);
+        ctx.strokeStyle = '#77DDFF';
+        ctx.lineTo(81, 224);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(81, 224);
+        ctx.strokeStyle = '#D28EFF';
+        ctx.lineTo(141, 229);
+        ctx.stroke();
+        ctx.beginPath();
+        //ctx.bezierCurveTo(38, 317, 81, 224, 141, 229);
+        ctx.strokeStyle = '#61d40c';
+        ctx.stroke();
+        //ctx.fill();
+
+    }
+
+    function ajax_download(){
+        let timestamp=new Date().getTime();              
+           $.ajax({ 
+            url: 'http://localhost:8080/scada-front-web/webportal/getConsignorContainersExportExcel',  
+            headers: {'X-Session-Token': '0ff31ef532bc46129aaa032cc1f51a94',"Content-type": "application/json"},     
+            method:'POST',
+            xhrFields:{'responseType': 'blob'},
+            data: JSON.stringify({"cntrno":"ZCSU6550597","starttm":"","endtm":""}),
+            success: function(responseType, response){
+                let content = responseType;
+                console.log('content',content)
+                // 组装a标签
+                let elink = document.createElement("a");
+                // 设置下载文件名
+                
+                elink.download = timestamp + ".xlsx";
+                elink.style.display = "none";
+                let blob = new Blob([content]);
+                elink.href = URL.createObjectURL(blob);
+                document.body.appendChild(elink);
+                elink.click();
+                document.body.removeChild(elink);
+            }
+        });
+    }
+</script>
+
+</html>

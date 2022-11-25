@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML5学习</title>
+    <style type="text/css">
+        .div1 {
+            width: 100px;
+            height: 100px;
+            padding: 20px;
+            border: 1px solid #000;
+            float: left;
+        }
+
+        p {
+            font-size: 28px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="background: purple" class="div1" id="div1" data-index="0" draggable="true" ondrop="drop(event)"
+        ondragstart="dragstart(event)" ondragover="allowDrop(event)">1</div>
+    <div style="background: orange" class="div1" id="div2" data-index="1" draggable="true" ondrop="drop(event)"
+        ondragstart="dragstart(event)" ondragover="allowDrop(event)">2</div>
+    <div style="background: aqua" class="div1" id="div3" data-index="2" draggable="true" ondrop="drop(event)"
+        ondragstart="dragstart(event)" ondragover="allowDrop(event)">3</div>
+    </div>
+    <div style="background: aqua" class="div1" id="div4" data-index="2" draggable="true" ondrop="drop(event)"
+    ondragstart="dragstart(event)" ondragover="allowDrop(event)">4</div>
+</div>
+    <script>
+        let container = null
+        function drag(e) {
+            console.log("drag", e);
+            //e.dataTransfer.setData("Text", e.target.id);
+        }
+        function dragstart(e) {
+            e.dataTransfer.setData("Text", e.target.id);
+            container = document.getElementById(e.target.id);
+        }
+        function allowDrop(e) {
+            console.log("allowDrop", e);
+            e.preventDefault();
+        }
+        function drop(e) {
+            console.log("drop", e);
+            //e.preventDefault();
+            var obj = document.getElementById(e.target.id);
+            if(container != null && container != obj)
+            {
+                let temp = document.createElement("div")
+                document.body.replaceChild(temp,obj)
+                console.log(document.body)
+                document.body.replaceChild(obj,container)
+                console.log(document.body)
+                document.body.replaceChild(container,temp)
+                console.log(document.body)
+            }
+        }
+    </script>
+</body>
+
+</html>
