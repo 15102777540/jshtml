@@ -6,7 +6,7 @@ git branch -M main
 git remote add origin https://github.com/15102777540/jshtml.git
 git push -u origin main
 
-# 导入本地仓库 1
+# 导入本地仓库 1222222222
 git remote add origin https://github.com/15102777540/jshtml.git
 git branch -M main
 git push -u origin main
